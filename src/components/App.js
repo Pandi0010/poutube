@@ -1,16 +1,26 @@
 import { useState, useEffect } from "react";
 
 function App() {
+  const [init, setInit] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const getMovies = async () => {
-    const json = await (
-      await fetch(
-        "https://www.googleapis.com/youtube/v3/search"
-      )
-    ).json();
-    
-  return <div></div>;
-  
+  useEffect(() => {
+    authService.onAuthStateChanged((user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+      setInit(true);
+    });
+  }, []);
+
+  return (
+    <>
+      {init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing..."}
+      <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
+    </>
+  );
 }
 
 export default App;
