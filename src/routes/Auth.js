@@ -6,6 +6,7 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(true);
   const [error, setError] = useState("");
+
   const onChange = (event) => {
     const {
       target: { name, value },
@@ -16,6 +17,7 @@ const Auth = () => {
       setPassword(value);
     }
   };
+
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -33,6 +35,7 @@ const Auth = () => {
       setError(error.message);
     }
   };
+
   const toggleAccount = () => setNewAccount((prev) => !prev);
 
   return (
