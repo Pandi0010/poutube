@@ -1,5 +1,5 @@
 import React from "react";
-import { authService } from "fbase";
+import { authService } from "../fbase";
 import { useHistory } from "react-router-dom";
 
 export default () => {
