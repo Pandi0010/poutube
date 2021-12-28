@@ -6,16 +6,18 @@ const SearchHeader = memo(({ onSearch }) => {
   const handleSearch = () => {
     const value = inputRef.current.value;
     onSearch(value);
-  };
+  }; // 검색 입력 필수
+
   const onClick = () => {
     handleSearch();
-  };
+  }; //클릭
 
   const onKeyPress = (event) => {
     if (event.key === "Enter") {
       handleSearch();
     }
   };
+
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -27,13 +29,14 @@ const SearchHeader = memo(({ onSearch }) => {
         className={styles.input}
         type="search"
         placeholder="Search..."
-        onKeyPress={onKeyPress}
+        onKeyPress={onKeyPress} //검색 input
       />
+
       <button className={styles.button} type="submit" onClick={onClick}>
         <img
           className={styles.buttonImg}
           src="/images/search.png"
-          alt="search"
+          alt="search" //검색 버튼 아이콘 및 입력
         />
       </button>
     </header>
