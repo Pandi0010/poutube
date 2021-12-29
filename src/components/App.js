@@ -11,8 +11,13 @@ function App() {
 
   const httpClient = axios.create({
     baseURL: "https://www.googleapis.com/youtube/v3",
-    params: { key: process.env.REACT_APP_YOUTUBE_API_KEY },
-  });
+    params: {
+      part: "snippet",
+      maxResults: 30,
+      type: "video",
+      key: process.env.REACT_APP_YOUTUBE_API_KEY,
+    },
+  }); // 유튜브 api 키 값 받아옴
 
   const youtube = new Youtube(httpClient);
 
@@ -21,7 +26,7 @@ function App() {
       {init ? (
         <AppRouter isLoggedIn={isLoggedIn} />
       ) : (
-        <AppMain youtube={youtube} />
+        <AppMain youtube={youtube} /> //로딩화면과 메인화면
       )}
     </>
   );

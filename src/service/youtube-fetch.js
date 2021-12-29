@@ -29,4 +29,4 @@ class YoutubeFetch {
   }
 }
 
-export default Youtube;
+export default YoutubeFetch;
