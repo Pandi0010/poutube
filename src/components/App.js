@@ -16,7 +16,7 @@ function App() {
       maxResults: 30,
       type: "video",
       key: process.env.REACT_APP_YOUTUBE_API_KEY,
-    },
+    }, // key값 수정
   }); // 유튜브 api 키 값 받아옴
 
   const youtube = new Youtube(httpClient);
