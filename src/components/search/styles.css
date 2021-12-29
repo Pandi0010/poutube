@@ -1,29 +1,6 @@
-.header {
-  display: flex;
-  height: 4rem;
-  padding: 0.8em 1em;
-  background: white;
-  color: black;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  margin-right: 1em;
-}
-
-.input {
-  flex-basis: 100%;
-  font-size: 1.2rem;
-  outline: 0;
-}
-
-.button {
-  background-color: darkgray;
-  outline: 0;
-}
-
-.buttonImage {
-  height: 100%;
-  padding: 0.5em 0.2em;
+.ui.fluid.category.search {
+  border-radius: 5px;
+  box-shadow: 0 0px 2.2px rgba(0, 0, 0, 0.026), 0 0px 5.3px rgba(0, 0, 0, 0.037),
+    0 0px 10px rgba(0, 0, 0, 0.045), 0 0px 17.9px rgba(0, 0, 0, 0.053),
+    0 0px 33.4px rgba(0, 0, 0, 0.062), 0 0px 80px rgba(0, 0, 0, 0.07);
 }
