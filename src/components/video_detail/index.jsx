@@ -1,24 +1,21 @@
 import React from "react";
-import styles from "./styles.css";
+import "./styles.css";
 
 const VideoDetail = ({ video }) => {
-  return (
-    <section className={styles.detail}>
-      <iframe
-        title="youtube video player"
-        className={styles.video}
-        type="text/html"
-        width="100%"
-        height="500px"
-        src={`https://www.youtube.com/embed/${video.id}`}
-        frameBorder="0"
-        allowFullScreen
-      />
-      <h2>{video.snippet.title}</h2>
-      <h3>{video.snippet.channelTitle}</h3>
-      <pre className={styles.description}>{video.snippet.description}</pre>
-    </section>
-  );
+  if (video) {
+    const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`;
+
+    return (
+      <div className="ui segment video-detail" style={{ marginTop: "10px" }}>
+        <div className="ui embed">
+          <iframe src={videoSrc} title="Video player"></iframe>
+        </div>
+        <h5>{video.snippet.title}</h5>
+        <p>{video.snippet.description}</p>
+      </div>
+    );
+  }
+  return <div>Loading...</div>;
 };
 
 export default VideoDetail;

@@ -1,46 +1,40 @@
-import styles from "./styles.css";
-import React, { memo, useRef } from "react";
+import React from "react";
+import "./styles.css";
 
-const SearchHeader = memo(({ onSearch }) => {
-  const inputRef = useRef();
-  const handleSearch = () => {
-    const value = inputRef.current.value;
-    onSearch(value);
-  }; // 검색 입력 필수
+class SearchHeader extends React.Component {
+  state = { term: "" };
 
-  const onClick = () => {
-    handleSearch();
-  }; //클릭
+  onFormSubmit = (e) => {
+    e.preventDefault();
 
-  const onKeyPress = (event) => {
-    if (event.key === "Enter") {
-      handleSearch();
-    }
+    this.props.onTermSubmit(this.state.term);
   };
 
-  return (
-    <header className={styles.header}>
-      <div className={styles.logo}>
-        <img className={styles.img} src="/images/logo.png" alt="logo" />
-        <h1 className={styles.title}>Youtube</h1>
-      </div>
-      <input
-        ref={inputRef}
-        className={styles.input}
-        type="search"
-        placeholder="Search..."
-        onKeyPress={onKeyPress} //검색 input
-      />
+  onInputChange = (e) => {
+    this.setState({ term: e.target.value });
+  };
 
-      <button className={styles.button} type="submit" onClick={onClick}>
-        <img
-          className={styles.buttonImg}
-          src="/images/search.png"
-          alt="search" //검색 버튼 아이콘 및 입력
-        />
-      </button>
-    </header>
-  );
-});
+  render() {
+    return (
+      <div className="ui fluid category search">
+        <form
+          className="ui icon input form"
+          onSubmit={this.onFormSubmit}
+          style={{ width: "100%" }}
+        >
+          <input
+            className="prompt"
+            type="text"
+            placeholder="Search Videos..."
+            onChange={this.onInputChange}
+            value={this.state.term}
+          />
+          <i className="search icon"></i>
+        </form>
+        <div className="results"></div>
+      </div>
+    );
+  }
+}
 
 export default SearchHeader;
