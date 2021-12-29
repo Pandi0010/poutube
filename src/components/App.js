@@ -23,11 +23,7 @@ function App() {
 
   return (
     <>
-      {init ? (
-        <AppRouter isLoggedIn={isLoggedIn} />
-      ) : (
-        <AppMain youtube={youtube} /> //로딩화면과 메인화면
-      )}
+      <AppMain youtube={youtube} />
     </>
   );
 }
