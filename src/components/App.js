@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import AppRouter from "./Router";
-import { authService } from "firebase";
+import AppRouter from "../components/Router";
+import { authService } from "../fbase";
 import AppMain from "../AppMain";
 import Youtube from "../service/youtube";
 import axios from "axios";
 
 function App() {
   const [init, setInit] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userObj, setUserObj] = useState(null);
 
   const httpClient = axios.create({
     baseURL: "https://www.googleapis.com/youtube/v3",
@@ -21,9 +21,39 @@ function App() {
 
   const youtube = new Youtube(httpClient);
 
+  useEffect(() => {
+    authService.onAuthStateChanged((user) => {
+      if (user) {
+        setUserObj({
+          displayName: user.displayName,
+          uid: user.uid,
+          updateProfile: (args) => user.updateProfile(args),
+        });
+      }
+      setInit(true);
+    });
+  }, []);
+
+  const refreshUser = () => {
+    const user = authService.currentUser;
+    setUserObj({
+      displayName: user.displayName,
+      uid: user.uid,
+      updateProfile: (args) => user.updateProfile(args),
+    });
+  };
+
   return (
     <>
-      <AppMain youtube={youtube} />
+      {init ? (
+        <AppRouter
+          refreshUser={refreshUser}
+          isLoggedIn={Boolean(userObj)}
+          userObj={userObj}
+        />
+      ) : (
+        "Initializing..."
+      )}
     </>
   );
 }

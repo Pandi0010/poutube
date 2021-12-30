@@ -4,6 +4,7 @@ import VideoList from "./components/video_list";
 import VideoDetail from "./components/video_detail";
 import Spinner from "./spinner";
 import youtube from "./youtube";
+import { authService } from "./fbase";
 
 class AppMain extends React.Component {
   state = {
@@ -19,7 +20,7 @@ class AppMain extends React.Component {
 
   onTermSubmit = async (term) => {
     this.setState({ loading: true });
-    console.log(process.env.REACT_APP_YOUTUBE_API_KEY);
+    //console.log(process.env.REACT_APP_YOUTUBE_API_KEY);
     try {
       const response = await youtube.get("/search", {
         params: { q: term },
@@ -67,9 +68,14 @@ class AppMain extends React.Component {
   }
 
   render() {
+    const onLogOutClick = () => {
+      authService.signOut();
+    };
+
     return (
       <div className="ui container" style={{ marginTop: "10px" }}>
         <SearchHeader onTermSubmit={this.onTermSubmit}></SearchHeader>
+        <button onClick={onLogOutClick}>Log Out</button>
         {this.renderContent()}
       </div>
     );
