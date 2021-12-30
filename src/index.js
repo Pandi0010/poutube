@@ -10,7 +10,7 @@ import { Router } from "workbox-routing";
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppMain />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
